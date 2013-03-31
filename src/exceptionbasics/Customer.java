@@ -12,6 +12,20 @@ public class Customer {
     private String customerID;
     private String state;
     private String ssn;
+    private String ERR_NULL = "Sorry cannot be null.";
+    private String ERR_NO_NUMS = "Sorry cannot contain numbers.";
+    private String ERR_HYP = "Must contain two hyphens.";
+    private String ERR_CONTAIN_TEN = "Must contain 10 digits.";
+    private String ERR_CONTAIN_FIVE = "Must contain 5 digits.";
+    private String ERR_CONTAIN_NINE = "Must conatin 9 digits.";
+    private String ERR_STATE_CONTAIN = "State must contain two letters.";
+    private String EMPTY_STRING = "";
+    private String HYP = "-";
+    private int FIVE = 5;
+    private int TWO = 2;
+    private int THREE = 3;
+    private int NINE = 9;
+    private int TEN = 10;
 
     /**
      * This method gets the first name from a customer.
@@ -30,12 +44,12 @@ public class Customer {
      */
     public void setFirstName(String firstName) throws IllegalArgumentException {
         if (firstName == null) {
-            throw new IllegalArgumentException("Sorry first name connot be null.");
+            throw new IllegalArgumentException(ERR_NULL);
         }
         char[] chars = firstName.toCharArray();
         for (char c : chars) {
             if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("First name cannot contain numbers.");
+                throw new IllegalArgumentException(ERR_NO_NUMS);
             }
         }
         this.firstName = firstName;
@@ -58,12 +72,12 @@ public class Customer {
      */
     public void setLastName(String lastName) throws IllegalArgumentException {
         if (lastName == null) {
-            throw new IllegalArgumentException("Sorry last name cannot be null.");
+            throw new IllegalArgumentException(ERR_NULL);
         }
         char[] chars = lastName.toCharArray();
         for (char c : chars) {
             if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("Last name cannot contain numbers.");
+                throw new IllegalArgumentException(ERR_NO_NUMS);
             }
         }
         this.lastName = lastName;
@@ -86,20 +100,20 @@ public class Customer {
      */
     public void setPhone(String phone) throws IllegalArgumentException {
         if (phone == null) {
-            throw new IllegalArgumentException("phone number cannot be null.");
+            throw new IllegalArgumentException(ERR_NULL);
         }
-        String[] pieces = phone.split("-");
-        if (phone.contains("-") && pieces.length != 3) {
-            throw new IllegalArgumentException("Must have two hyphens.");
+        String[] pieces = phone.split(HYP);
+        if (phone.contains(HYP) && pieces.length != THREE) {
+            throw new IllegalArgumentException(ERR_HYP);
         }
-        phone = phone.replaceAll("-", "");
-        if (phone.length() != 9) {
-            throw new IllegalArgumentException("Must have 10 digits.");
+        phone = phone.replaceAll(HYP, EMPTY_STRING);
+        if (phone.length() != TEN) {
+            throw new IllegalArgumentException(ERR_CONTAIN_TEN);
         }
         char[] chars = phone.toCharArray();
         for (char c : chars) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("Must have 10 digits.");
+                throw new IllegalArgumentException(ERR_CONTAIN_TEN);
             }
         }
         this.phone = phone;
@@ -116,12 +130,13 @@ public class Customer {
 
     /**
      * This method sets the address for a customer.
+     *
      * @param address - a valid address. (Ex. 1000 South 108th Street)
      * @throws - IllegalArgumentException if address is not valid.
      */
     public void setAddress(String address) throws IllegalArgumentException {
-        if(address == null){
-            throw new IllegalArgumentException("Sorry address cannot be null.");
+        if (address == null) {
+            throw new IllegalArgumentException(ERR_NULL);
         }
         this.address = address;
     }
@@ -137,17 +152,21 @@ public class Customer {
 
     /**
      * This method sets the zip for a customer.
+     *
      * @param zip - a validated zip code. (Ex. 53214)
-     * @throws - IllegalArgumentException if zip code is not valid to 5 digits. 
+     * @throws - IllegalArgumentException if zip code is not valid to 5 digits.
      */
     public void setZip(String zip) throws IllegalArgumentException {
-        if(zip == null){
-            throw new IllegalArgumentException("Sorry zip cannot be null.");
+        if (zip == null) {
+            throw new IllegalArgumentException(ERR_NULL);
+        }
+        if (zip.length() != FIVE) {
+            throw new IllegalArgumentException(ERR_CONTAIN_FIVE);
         }
         char[] chars = zip.toCharArray();
         for (char c : chars) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("Must have 5 digits.");
+                throw new IllegalArgumentException(ERR_CONTAIN_FIVE);
             }
         }
         this.zip = zip;
@@ -163,18 +182,22 @@ public class Customer {
     }
 
     /**
-     * This method sets the customer id for a customer. 
+     * This method sets the customer id for a customer.
+     *
      * @param customerID - a valid customer id. (Ex. 12345)
      * @throws - IllegalArgumentException if customer id is not valid.
      */
     public void setCustomerID(String customerID) throws IllegalArgumentException {
-        if(customerID == null){
-            throw new IllegalArgumentException("Sorry customer id cannot be null.");
+        if (customerID == null) {
+            throw new IllegalArgumentException(ERR_NULL);
+        }
+        if (customerID.length() != FIVE) {
+            throw new IllegalArgumentException(ERR_CONTAIN_FIVE);
         }
         char[] chars = customerID.toCharArray();
         for (char c : chars) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("Must have 5 digits.");
+                throw new IllegalArgumentException(ERR_CONTAIN_FIVE);
             }
         }
         this.customerID = customerID;
@@ -198,20 +221,20 @@ public class Customer {
      */
     public void setSsn(String ssn) throws IllegalArgumentException {
         if (ssn == null) {
-            throw new IllegalArgumentException("Social Security Number cannot be null.");
+            throw new IllegalArgumentException(ERR_NULL);
         }
-        String[] pieces = ssn.split("-");
-        if (ssn.contains("-") && pieces.length != 3) {
-            throw new IllegalArgumentException("Must have two hyphens.");
+        String[] pieces = ssn.split(HYP);
+        if (ssn.contains(HYP) && pieces.length != THREE) {
+            throw new IllegalArgumentException(ERR_HYP);
         }
-        ssn = ssn.replaceAll("-", "");
-        if (ssn.length() != 9) {
-            throw new IllegalArgumentException("Must have 9 digits.");
+        ssn = ssn.replaceAll(HYP, EMPTY_STRING);
+        if (ssn.length() != NINE) {
+            throw new IllegalArgumentException(ERR_CONTAIN_NINE);
         }
         char[] chars = ssn.toCharArray();
         for (char c : chars) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("Must have 9 digits.");
+                throw new IllegalArgumentException(ERR_CONTAIN_NINE);
             }
         }
         this.ssn = ssn;
@@ -233,8 +256,8 @@ public class Customer {
      * @throws - IllegalArgumentException if state is not 2 characters in length
      */
     public void setState(String state) throws IllegalArgumentException {
-        if (state == null || state.length() != 2) {
-            throw new IllegalArgumentException("state must be 2 characters in length.");
+        if (state == null || state.length() != TWO) {
+            throw new IllegalArgumentException(ERR_STATE_CONTAIN);
         }
         this.state = state;
     }
